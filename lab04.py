@@ -84,6 +84,16 @@ bad_loot_options = ["Poison Potion"]
 # Define the number of stars awarded to the Player
 num_stars = 0
 
+#Q4. Define belt
+belt = []
+
+#Q1. Monster's Powers
+monster_powers = {
+    "Fire Magic": 2,
+    "Freeze Time": 4,
+    "Super Hearing": 6
+}
+
 # Use a While Loop to get valid input for Hero and Monster's Combat Strength
 i = 0
 
@@ -134,6 +144,15 @@ else:
 if weapons[weaponRoll - 1] != "Fist":
     print("--- Thank goodness you didn't roll the Fist...")
 
+#Q2. Roll for Monster's Magic Power
+monster_power_keys = list(monster_powers.keys())
+monster_power = random.choice(monster_power_keys)
+print(monster_power)
+
+#Q3. Update Monster's Combat Strength
+m_combat_strength = min(6, m_combat_strength + monster_powers[monster_power])
+print(f"Monster got {monster_power}, increasing their combat strength to {m_combat_strength}.")
+
 # Roll for player health points
 input("Roll the dice for your health points (Press enter)")
 health_points = random.choice(diceOptions)
@@ -143,6 +162,37 @@ print("Player rolled " + str(health_points) + " health points")
 input("Roll the dice for the monster's health points (Press enter)")
 m_health_points = random.choice(diceOptions)
 print("Player rolled " + str(m_health_points) + " health points for the monster")
+
+#Q5. The player collects loot
+print("You found loot!")
+input("Roll the dice for your first item (Press enter)")
+loot_item1_idx = random.choice(list(range(0, 5)))
+loot_item1 = loot_options.pop(loot_item1_idx)
+belt.append(loot_item1)
+print(f"You now have {belt}.")
+
+#Q6. The player collects more loot
+print("You found more loot!")
+input("Roll the dice for your second item (Press enter)")
+loot_item2_idx = random.choice(list(range(0, 4)))
+loot_item2 = loot_options.pop(loot_item2_idx)
+belt.append(loot_item2)
+print(f"You now have {belt}.")
+
+#Q7. Organizing the Loot Belt
+belt.sort()
+print(belt)
+
+#Q8. Use first item
+use_item = belt.pop(0)
+if use_item in good_loot_options:
+    health_points = min(6, health_points + 2)
+    print(f"You gained 2 health points! Now you have {health_points} health points.")
+elif use_item in bad_loot_options:
+    health_points = max(0, health_points - 2)
+    print(f"You lost 2 health points! Now you have {health_points} health points.")
+else:
+    print(f"The item was not helpful. You still have {health_points} health points.")
 
 input("Analyze the roll (Press enter)")
 # Compare Player vs Monster's strength
