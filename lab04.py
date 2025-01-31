@@ -177,7 +177,7 @@ input("Roll the dice for your second item (Press enter)")
 loot_item2_idx = random.choice(list(range(0, 4)))
 loot_item2 = loot_options.pop(loot_item2_idx)
 belt.append(loot_item2)
-print(f"You now have {belt}.")
+print(f"You now have: {belt}.")
 
 #Q7. Organizing the Loot Belt
 belt.sort()
